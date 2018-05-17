@@ -1,0 +1,24 @@
+sudo: false
+dist: trusty
+language: node_js
+env:
+  global:
+  - TERRAFORM_VER="0.11.7"
+  - TF_INPUT=false
+before_install:
+- mkdir -p ~/bin
+- curl -fSL "https://releases.hashicorp.com/terraform/${TERRAFORM_VER}/terraform_${TERRAFORM_VER}_linux_amd64.zip"
+  -o terraform.zip
+- unzip -o terraform.zip -d ~/bin
+- rm -f terraform.zip
+- export PATH="~/bin:$PATH"
+- pip install --quiet --user awscli
+install: true
+script:
+- if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then bash ./ci/plan.sh; fi
+deploy:
+  - provider: script
+    skip_cleanup: true
+    script: "./ci/provision.sh"
+    on:
+      branch: master

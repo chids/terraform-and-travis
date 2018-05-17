@@ -1,0 +1,4 @@
+.*
+*.iml
+*.tfstate*
+!.travis.yml

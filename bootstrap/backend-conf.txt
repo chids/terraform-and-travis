@@ -1,0 +1,4 @@
+key            = "${project}"
+region         = "${region}"
+bucket         = "${bucket}"
+dynamodb_table = "${lock}"
