@@ -2,6 +2,9 @@
 
 ----
 
-Dummy showcase for a _very_ basic Terraform + Travis setup that stores plans in S3 on PR's and applys on commits to `master`. The output from Terraform plan is posted as a comment on the PR after each build.
+Dummy showcase for a _very_ basic Terraform + Travis setup:
+* The output from Terraform `plan` is posted as a comment on the PR after each build
+* The plan file is stored in S3 as part of the PR build
+* The stored plan is applied when the PR is merged to `master`
 
-The [`bootstrap`](bootstrap/) folder contains a stand-alone Terraform setup that creates the resrouces for Terraform to use when run from Travis (buckets for state and plans, Dnynamodb table for locking).
+The [`bootstrap`](bootstrap/) folder contains a stand-alone Terraform setup that creates the resrouces for Terraform to use when run from Travis (S3 buckets for state and plans and a DynamoDB table for locking).
